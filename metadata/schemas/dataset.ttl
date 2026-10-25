@@ -48,4 +48,37 @@
     dash:editor dash:URIEditor ;
     dash:viewer dash:LabelViewer ;
     sh:order 25 ;
+  ], [
+    sh:path dct:temporal ;
+    sh:node :PeriodOfTimeShape ;
+    sh:maxCount 1 ;
+    dash:editor dash:BlankNodeEditor ;
+    sh:order 26 ;
+  ], [
+    sh:path dct:source ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1 ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:LabelViewer ;
+    sh:order 27 ;
+  ] .
+
+:PeriodOfTimeShape a sh:NodeShape ;
+  sh:targetClass dct:PeriodOfTime ;
+  sh:property [
+    sh:path dcat:startDate ;
+    sh:nodeKind sh:Literal ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    dash:editor dash:DatePickerEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 1 ;
+  ], [
+    sh:path dcat:endDate ;
+    sh:nodeKind sh:Literal ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    dash:editor dash:DatePickerEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 2 ;
   ] .
