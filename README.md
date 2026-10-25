@@ -1,6 +1,6 @@
 # FAIRification of Dutch Railway Disruption Data (2024)
 
-FAIR Data Engineering course project, University of Twente, 2026-1A – **Group 18** (Balachandar Gurumurthy).
+FAIR Data Engineering course project, University of Twente, 2026-1A – **Group 18** (Balachandar Gurumurthy)(Raghav Harish Ragunathan).
 
 This repository contains the 2024 train disruption data published by
 [Rijden de Treinen](https://www.rijdendetreinen.nl/en/open-data/disruptions), before and after FAIRification.
