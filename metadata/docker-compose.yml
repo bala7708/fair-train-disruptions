@@ -1,0 +1,38 @@
+services:
+  fdp:
+    image: fairdata/fairdatapoint:1.18.2
+    restart: unless-stopped
+    # run as root so the FDP may write its triple store into the Docker volume
+    user: "0"
+    environment:
+      INSTANCE_CLIENTURL: http://localhost
+      INSTANCE_PERSISTENTURL: http://localhost
+      # 2 = native triple store: metadata is saved on disk (volume below) and survives restarts
+      REPOSITORY_TYPE: 2
+      REPOSITORY_NATIVE_DIR: /fdp-store
+      # do not register this local test FDP at home.fairdatapoint.org
+      PING_ENABLED: "false"
+    volumes:
+      - fdp-store:/fdp-store
+    depends_on:
+      - mongo
+
+  fdp-client:
+    image: fairdata/fairdatapoint-client:1.18.1
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:80:80"
+    environment:
+      FDP_HOST: fdp
+    depends_on:
+      - fdp
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  fdp-store:
+  mongo-data:

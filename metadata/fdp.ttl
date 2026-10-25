@@ -1,0 +1,53 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+
+<http://localhost> a dcat:Resource, dcat:DataService, <https://w3id.org/fdp/fdp-o#MetadataService>,
+    <https://w3id.org/fdp/fdp-o#FAIRDataPoint>;
+  dcterms:title "FAIR Data Point – Group 18 (FAIR Data Engineering, University of Twente)";
+  <http://www.w3.org/2000/01/rdf-schema#label> "FAIR Data Point – Group 18 (FAIR Data Engineering, University of Twente)";
+  dcat:version "1.0";
+  <https://w3id.org/fdp/fdp-o#metadataIssued> "2026-10-25T09:43:04.587321621Z"^^xsd:dateTime;
+  <https://w3id.org/fdp/fdp-o#metadataModified> "2026-10-25T10:04:37.406825321Z"^^xsd:dateTime;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/>;
+  dcterms:description "FAIR Data Point of Group 18 (Balachandar Gurumurthy) for the FAIR Data Engineering course 2026-1A. It publishes the metadata of the FAIRified Dutch train disruption data (Rijden de Treinen, 2024).";
+  dcterms:conformsTo <http://localhost/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c>,
+    <http://localhost/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c>;
+  dcterms:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+  <https://w3id.org/fdp/fdp-o#metadataIdentifier> <http://localhost#identifier>;
+  <http://www.re3data.org/schema/3-0#repositoryIdentifier> <http://localhost#identifier>;
+  dcterms:accessRights <http://localhost#accessRights>;
+  dcterms:publisher <http://localhost#publisher>;
+  dcat:endpointURL <http://localhost>, <http://localhost>;
+  <https://w3id.org/fdp/fdp-o#fdpSoftwareVersion> "FDP:v1.18.2~0cba71a", "FDP:v1.18.2~0cba71a";
+  <https://w3id.org/fdp/fdp-o#metadataCatalog> <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98>;
+  <http://semanticscience.org/resource/SIO_000628> <http://localhost/metrics/445c0a70d1e214e545b261559e2842f4>,
+    <http://localhost/metrics/5d27e854a9e78eb3f663331cd47cdc13> .
+
+<http://localhost#identifier> a <http://purl.org/spar/datacite/Identifier>;
+  dcterms:identifier "http://localhost" .
+
+<http://localhost#accessRights> a dcterms:RightsStatement;
+  dcterms:description "This resource has no access restriction" .
+
+<http://localhost#publisher> a foaf:Agent;
+  foaf:name "Balachandar Gurumurthy" .
+
+<http://localhost/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c> <http://www.w3.org/2000/01/rdf-schema#label>
+    "FAIR Data Point Profile", "FAIR Data Point Profile" .
+
+<http://localhost/catalog/> a ldp:DirectContainer, ldp:DirectContainer;
+  dcterms:title "Catalogs", "Catalogs";
+  ldp:hasMemberRelation <https://w3id.org/fdp/fdp-o#metadataCatalog>, <https://w3id.org/fdp/fdp-o#metadataCatalog>;
+  ldp:membershipResource <http://localhost>, <http://localhost>;
+  ldp:contains <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98> .
+
+<http://localhost/metrics/445c0a70d1e214e545b261559e2842f4> <http://semanticscience.org/resource/SIO_000628>
+    <https://www.ietf.org/rfc/rfc3986.txt>;
+  <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<http://localhost/metrics/5d27e854a9e78eb3f663331cd47cdc13> <http://semanticscience.org/resource/SIO_000628>
+    <https://www.wikidata.org/wiki/Q8777>;
+  <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> .

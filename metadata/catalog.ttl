@@ -1,0 +1,54 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+
+<http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98> a dcat:Resource, dcat:Catalog;
+  dcterms:title "Dutch Railway Data – Group 18";
+  <http://www.w3.org/2000/01/rdf-schema#label> "Dutch Railway Data – Group 18";
+  dcat:version "1.0";
+  <https://w3id.org/fdp/fdp-o#metadataIssued> "2026-10-25T09:53:48.886753867Z"^^xsd:dateTime;
+  <https://w3id.org/fdp/fdp-o#metadataModified> "2026-10-25T10:04:37.382414568Z"^^xsd:dateTime;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/>;
+  dcterms:description "Catalog of FAIRified datasets about the Dutch railway network, created in the FAIR Data Engineering course (University of Twente, 2026-1A).";
+  dcterms:conformsTo <http://localhost/profile/a0949e72-4466-4d53-8900-9436d1049a4b>,
+    <http://localhost/profile/a0949e72-4466-4d53-8900-9436d1049a4b>;
+  dcterms:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+  <https://w3id.org/fdp/fdp-o#metadataIdentifier> <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98#identifier>;
+  dcterms:accessRights <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98#accessRights>;
+  dcterms:publisher [ a foaf:Agent;
+      foaf:name "Balachandar Gurumurthy"
+    ];
+  <http://semanticscience.org/resource/SIO_000628> <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98/metrics/445c0a70d1e214e545b261559e2842f4>,
+    <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98/metrics/5d27e854a9e78eb3f663331cd47cdc13>;
+  dcterms:isPartOf <http://localhost>;
+  foaf:homePage <https://github.com/bala7708/fair-train-disruptions>;
+  dcterms:issued "2026-10-25T09:53:48.886753867Z"^^xsd:dateTime;
+  dcterms:modified "2026-10-25T09:54:38.331180854Z"^^xsd:dateTime;
+  dcat:dataset <http://localhost/dataset/5333c5cc-a7b4-4de4-b492-3b8de23fe64b>;
+  dcat:themeTaxonomy <http://publications.europa.eu/resource/authority/data-theme/TRAN> .
+
+<http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98#identifier> a <http://purl.org/spar/datacite/Identifier>;
+  dcterms:identifier "http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98" .
+
+<http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98#accessRights> a dcterms:RightsStatement;
+  dcterms:description "This resource has no access restriction" .
+
+<http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98/metrics/445c0a70d1e214e545b261559e2842f4>
+  <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt>;
+  <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+  <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777>;
+  <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> .
+
+<http://localhost/profile/a0949e72-4466-4d53-8900-9436d1049a4b> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Catalog Profile", "Catalog Profile" .
+
+<http://localhost/dataset/> a ldp:DirectContainer, ldp:DirectContainer;
+  dcterms:title "Datasets", "Datasets";
+  ldp:hasMemberRelation dcat:dataset, dcat:dataset;
+  ldp:membershipResource <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98>,
+    <http://localhost/catalog/494dcdb4-6990-41d4-a52d-39b044e0be98>;
+  ldp:contains <http://localhost/dataset/5333c5cc-a7b4-4de4-b492-3b8de23fe64b> .
