@@ -1,0 +1,490 @@
+[
+  {
+    "op": "core/column-removal",
+    "columnName": "ns_lines",
+    "description": "Remove column ns_lines"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "rdt_station_names",
+    "expression": "grel:forEachIndex(value.split(\",\"), i, n, cells[\"rdt_station_codes\"].value.split(\",\")[i].trim() + \"|\" + n.trim()).join(\";\")",
+    "onError": "set-to-blank",
+    "newColumnName": "station",
+    "columnInsertIndex": 4,
+    "description": "Create column station at index 4 based on column rdt_station_names using expression grel:forEachIndex(value.split(\",\"), i, n, cells[\"rdt_station_codes\"].value.split(\",\")[i].trim() + \"|\" + n.trim()).join(\";\")"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "rdt_station_names",
+    "description": "Remove column rdt_station_names"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "rdt_station_codes",
+    "description": "Remove column rdt_station_codes"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "rdt_lines_id",
+    "expression": "grel:forEachIndex(value.split(\",\"), i, n, n.trim() + \"|\" + cells[\"rdt_lines\"].value.split(\",\")[i].trim()).join(\";\")",
+    "onError": "set-to-blank",
+    "newColumnName": "line",
+    "columnInsertIndex": 3,
+    "description": "Create column line at index 3 based on column rdt_lines_id using expression grel:forEachIndex(value.split(\",\"), i, n, n.trim() + \"|\" + cells[\"rdt_lines\"].value.split(\",\")[i].trim()).join(\";\")"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "rdt_lines",
+    "description": "Remove column rdt_lines"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "rdt_lines_id",
+    "description": "Remove column rdt_lines_id"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "cause_nl",
+    "expression": "grel:value.trim().toLowercase().replace(/[^a-z0-9]+/, \"-\")",
+    "onError": "set-to-blank",
+    "newColumnName": "cause_id",
+    "columnInsertIndex": 4,
+    "description": "Create column cause_id at index 4 based on column cause_nl using expression grel:value.trim().toLowercase().replace(/[^a-z0-9]+/, \"-\")"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "statistical_cause_nl",
+    "expression": "grel:value.trim().toLowercase().replace(/[^a-z0-9]+/, \"-\")",
+    "onError": "set-to-blank",
+    "newColumnName": "statistical_cause_id",
+    "columnInsertIndex": 7,
+    "description": "Create column statistical_cause_id at index 7 based on column statistical_cause_nl using expression grel:value.trim().toLowercase().replace(/[^a-z0-9]+/, \"-\")"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "cause_group",
+    "expression": "grel:value.trim().replace(\" \", \"-\")",
+    "onError": "set-to-blank",
+    "newColumnName": "cause_group_id",
+    "columnInsertIndex": 10,
+    "description": "Create column cause_group_id at index 10 based on column cause_group using expression grel:value.trim().replace(\" \", \"-\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "start_time",
+    "expression": "jython:return None if not value else value.replace(\" \", \"T\") + (\"+02:00\" if \"2024-03-31 03:00:00\" <= value < \"2024-10-27 02:00:00\" else \"+01:00\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column start_time using expression jython:return None if not value else value.replace(\" \", \"T\") + (\"+02:00\" if \"2024-03-31 03:00:00\" <= value < \"2024-10-27 02:00:00\" else \"+01:00\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "end_time",
+    "expression": "jython:return None if not value else value.replace(\" \", \"T\") + (\"+02:00\" if \"2024-03-31 03:00:00\" <= value < \"2024-10-27 02:00:00\" else \"+01:00\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column end_time using expression jython:return None if not value else value.replace(\" \", \"T\") + (\"+02:00\" if \"2024-03-31 03:00:00\" <= value < \"2024-10-27 02:00:00\" else \"+01:00\")"
+  },
+  {
+    "op": "core/multivalued-cell-split",
+    "columnName": "station",
+    "keyColumnName": "rdt_id",
+    "mode": "separator",
+    "separator": ";",
+    "regex": false,
+    "description": "Split multi-valued cells in column station"
+  },
+  {
+    "op": "core/column-split",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "station",
+    "guessCellType": false,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": "|",
+    "regex": false,
+    "maxColumns": 0,
+    "description": "Split column station by separator"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "station 1",
+    "newColumnName": "station_code",
+    "description": "Rename column station 1 to station_code"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "station 2",
+    "newColumnName": "station_name",
+    "description": "Rename column station 2 to station_name"
+  },
+  {
+    "op": "core/multivalued-cell-split",
+    "columnName": "line",
+    "keyColumnName": "rdt_id",
+    "mode": "separator",
+    "separator": ";",
+    "regex": false,
+    "description": "Split multi-valued cells in column line"
+  },
+  {
+    "op": "core/column-split",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "line",
+    "guessCellType": false,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": "|",
+    "regex": false,
+    "maxColumns": 0,
+    "description": "Split column line by separator"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "line 1",
+    "newColumnName": "line_id",
+    "description": "Rename column line 1 to line_id"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "line 2",
+    "newColumnName": "line_name",
+    "description": "Rename column line 2 to line_name"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "baseColumnName": "line_id",
+    "expression": "grel:cell.cross(\"line-names\", \"line_id\")[0].cells[\"line_name_correct\"].value",
+    "onError": "set-to-blank",
+    "newColumnName": "line_name_correct",
+    "columnInsertIndex": 2,
+    "description": "Create column line_name_correct at index 2 based on column line_id using expression grel:cell.cross(\"line-names\", \"line_id\")[0].cells[\"line_name_correct\"].value"
+  },
+  {
+    "op": "core/fill-down",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "rdt_id",
+    "description": "Fill down cells in column rdt_id"
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "schema": {
+      "prefixes": [
+        {
+          "name": "ont",
+          "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "skos",
+          "uri": "http://www.w3.org/2004/02/skos/core#"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        }
+      ],
+      "baseUri": "https://w3id.org/FAIR-course-UT/2026/group18/data#",
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "columnName": "rdt_id",
+          "expression": "\"disruption-\" + value",
+          "isRowNumberCell": false,
+          "links": [
+            {
+              "uri": "https://schema.org/identifier",
+              "curie": "schema:identifier",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "rdt_id",
+                "expression": "value",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "https://schema.org/startDate",
+              "curie": "schema:startDate",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "start_time",
+                "expression": "value",
+                "valueType": "http://www.w3.org/2001/XMLSchema#dateTime",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "https://schema.org/endDate",
+              "curie": "schema:endDate",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "end_time",
+                "expression": "value",
+                "valueType": "http://www.w3.org/2001/XMLSchema#dateTime",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "https://schema.org/duration",
+              "curie": "schema:duration",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "duration_minutes",
+                "expression": "\"PT\" + value + \"M\"",
+                "valueType": "http://www.w3.org/2001/XMLSchema#duration",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "https://schema.org/location",
+              "curie": "schema:location",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "station_code",
+                "expression": "\"station-\" + value",
+                "isRowNumberCell": false,
+                "links": [
+                  {
+                    "uri": "https://schema.org/identifier",
+                    "curie": "schema:identifier",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "station_code",
+                      "expression": "value",
+                      "isRowNumberCell": false
+                    }
+                  },
+                  {
+                    "uri": "https://schema.org/name",
+                    "curie": "schema:name",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "station_name",
+                      "expression": "value",
+                      "isRowNumberCell": false
+                    }
+                  }
+                ],
+                "rdfTypes": [
+                  {
+                    "uri": "https://schema.org/TrainStation",
+                    "curie": "schema:TrainStation"
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#affectsLine",
+              "curie": "ont:affectsLine",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "line_id",
+                "expression": "\"line-\" + value",
+                "isRowNumberCell": false,
+                "links": [
+                  {
+                    "uri": "https://schema.org/identifier",
+                    "curie": "schema:identifier",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "line_id",
+                      "expression": "value",
+                      "isRowNumberCell": false
+                    }
+                  },
+                  {
+                    "uri": "https://schema.org/name",
+                    "curie": "schema:name",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "line_name_correct",
+                      "expression": "value",
+                      "isRowNumberCell": false
+                    }
+                  }
+                ],
+                "rdfTypes": [
+                  {
+                    "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#RailwayLine",
+                    "curie": "ont:RailwayLine"
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#hasStatisticalCause",
+              "curie": "ont:hasStatisticalCause",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "statistical_cause_id",
+                "expression": "\"cause-\" + value",
+                "isRowNumberCell": false,
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+                    "curie": "skos:prefLabel",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "statistical_cause_nl",
+                      "expression": "value",
+                      "lang": "nl",
+                      "isRowNumberCell": false
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+                    "curie": "skos:prefLabel",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "statistical_cause_en",
+                      "expression": "value",
+                      "lang": "en",
+                      "isRowNumberCell": false
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/2004/02/skos/core#broader",
+                    "curie": "skos:broader",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "columnName": "cause_group_id",
+                      "expression": "\"https://w3id.org/FAIR-course-UT/2026/group18/ont#\" + value",
+                      "isRowNumberCell": false,
+                      "links": [],
+                      "rdfTypes": []
+                    }
+                  }
+                ],
+                "rdfTypes": [
+                  {
+                    "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#DisruptionCause",
+                    "curie": "ont:DisruptionCause"
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#hasCause",
+              "curie": "ont:hasCause",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "cause_id",
+                "expression": "\"cause-\" + value",
+                "isRowNumberCell": false,
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+                    "curie": "skos:prefLabel",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "cause_nl",
+                      "expression": "value",
+                      "lang": "nl",
+                      "isRowNumberCell": false
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+                    "curie": "skos:prefLabel",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "columnName": "cause_en",
+                      "expression": "value",
+                      "lang": "en",
+                      "isRowNumberCell": false
+                    }
+                  }
+                ],
+                "rdfTypes": [
+                  {
+                    "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#DisruptionCause",
+                    "curie": "ont:DisruptionCause"
+                  }
+                ]
+              }
+            }
+          ],
+          "rdfTypes": [
+            {
+              "uri": "https://w3id.org/FAIR-course-UT/2026/group18/ont#TrainDisruption",
+              "curie": "ont:TrainDisruption"
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "links": [],
+          "rdfTypes": []
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "links": [],
+          "rdfTypes": []
+        }
+      ]
+    },
+    "description": "Save RDF schema skeleton"
+  }
+]

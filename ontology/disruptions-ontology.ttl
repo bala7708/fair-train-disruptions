@@ -1,0 +1,145 @@
+@prefix : <https://w3id.org/FAIR-course-UT/2026/group18/ont#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://w3id.org/FAIR-course-UT/2026/group18/ont#> .
+
+<https://w3id.org/FAIR-course-UT/2026/group18/ont> rdf:type owl:Ontology ;
+                                                         rdfs:comment "Concepts needed to describe Dutch train disruptions that are not covered by schema.org or SKOS."@en ;
+                                                         rdfs:label "Train disruption mini-ontology"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#affectsLine
+:affectsLine rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :TrainDisruption ;
+             rdfs:range :RailwayLine ;
+             rdfs:comment "Links a disruption to a railway line on which it caused delays or cancellations."@en ;
+             rdfs:label "affects line"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#hasCause
+:hasCause rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :TrainDisruption ;
+          rdfs:range :DisruptionCause ;
+          rdfs:comment "The cause of the disruption as last reported to travellers."@en ;
+          rdfs:label "has cause"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#hasStatisticalCause
+:hasStatisticalCause rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain :TrainDisruption ;
+                     rdfs:range :DisruptionCause ;
+                     rdfs:comment "The most descriptive known cause of the disruption, kept for statistical purposes."@en ;
+                     rdfs:label "has statistical cause"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+<http://www.w3.org/2004/02/skos/core#Concept> rdf:type owl:Class .
+
+
+###  https://schema.org/Event
+<https://schema.org/Event> rdf:type owl:Class .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#CauseGroup
+:CauseGroup rdf:type owl:Class ;
+            rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+            rdfs:comment "A category of disruption causes."@en ;
+            rdfs:label "Cause group"@en ,
+                       "Oorzaakgroep"@nl .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#DisruptionCause
+:DisruptionCause rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+                 rdfs:comment "A reason given for a train disruption."@en ;
+                 rdfs:label "Disruption cause"@en ,
+                            "Oorzaak van storing"@nl .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#RailwayLine
+:RailwayLine rdf:type owl:Class ;
+             rdfs:comment "A route between two stations on which trains run."@en ;
+             rdfs:label "Railway line"@en ,
+                        "Spoorlijn"@nl .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#TrainDisruption
+:TrainDisruption rdf:type owl:Class ;
+                 rdfs:subClassOf <https://schema.org/Event> ;
+                 rdfs:comment "An event in which several trains are delayed or cancelled, announced by NS."@en ;
+                 rdfs:label "Train disruption"@en ,
+                            "Treinstoring"@nl .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#accidents
+:accidents rdf:type owl:NamedIndividual ,
+                    :CauseGroup ;
+           rdfs:label "accidents"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#engineering-work
+:engineering-work rdf:type owl:NamedIndividual ,
+                           :CauseGroup ;
+                  rdfs:label "engineering work"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#external
+:external rdf:type owl:NamedIndividual ,
+                   :CauseGroup ;
+          rdfs:label "external"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#infrastructure
+:infrastructure rdf:type owl:NamedIndividual ,
+                         :CauseGroup ;
+                rdfs:label "infrastructure"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#logistical
+:logistical rdf:type owl:NamedIndividual ,
+                     :CauseGroup ;
+            rdfs:label "logistical"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#rolling-stock
+:rolling-stock rdf:type owl:NamedIndividual ,
+                        :CauseGroup ;
+               rdfs:label "rolling stock"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#staff
+:staff rdf:type owl:NamedIndividual ,
+                :CauseGroup ;
+       rdfs:label "staff"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#unknown
+:unknown rdf:type owl:NamedIndividual ,
+                  :CauseGroup ;
+         rdfs:label "unknown"@en .
+
+
+###  https://w3id.org/FAIR-course-UT/2026/group18/ont#weather
+:weather rdf:type owl:NamedIndividual ,
+                  :CauseGroup ;
+         rdfs:label "weather"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
