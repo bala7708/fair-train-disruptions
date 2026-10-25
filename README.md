@@ -64,4 +64,4 @@ licence. Please credit **Rijden de Treinen** as the source.
 
 
 
-An AI assistant was used for guidance and explanations of this file.
+An AI assistant was used for guidance and explanations of this readme file.
