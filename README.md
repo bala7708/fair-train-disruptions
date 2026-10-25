@@ -25,6 +25,8 @@ The redirect rules (a copy is in [`w3id/`](w3id/)) are published through the cou
 | `data/prepared/` | Data after preparation in OpenRefine (exported as CSV, records layout) |
 | `data/fairified/` | FAIRified data in RDF Turtle (81,756 triples) |
 | `ontology/` | Mini-ontology created in Protégé |
+| `metadata/` | Metadata exported from the FAIR Data Point (FDP v1.18): fdp, catalog, dataset and both distributions, plus `docker-compose.yml` to run the same FDP |
+| `metadata/schemas/` | SHACL metadata schemas of the FDP (Resource, FAIR Data Point, Catalog, Dataset, Distribution); the metadata conforms to them |
 | `openrefine/` | OpenRefine operation history incl. the RDF skeleton (re-applicable with *Undo/Redo → Apply*) and `line-names.csv` |
 
 ## How the data was produced
