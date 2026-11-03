@@ -24,7 +24,7 @@
   dcterms:isPartOf <http://localhost/dataset/5333c5cc-a7b4-4de4-b492-3b8de23fe64b>;
   dcat:accessURL <https://w3id.org/FAIR-course-UT/2026/group18/data>;
   dcat:downloadURL <https://raw.githubusercontent.com/bala7708/fair-train-disruptions/main/data/fairified/disruptions-2024.ttl>;
-  dcat:format "http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE";
+  dcat:format <http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE>;
   dcat:mediaType "text/turtle";
   dcterms:conformsTo <http://localhost/profile/02c649de-c579-43bb-b470-306abdc808c7> .
 

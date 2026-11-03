@@ -61,6 +61,13 @@
     dash:editor dash:URIEditor ;
     dash:viewer dash:LabelViewer ;
     sh:order 27 ;
+  ], [
+    sh:path dct:creator ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:LabelViewer ;
+    sh:order 28 ;
   ] .
 
 :PeriodOfTimeShape a sh:NodeShape ;

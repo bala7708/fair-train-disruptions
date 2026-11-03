@@ -1,6 +1,6 @@
 # FAIRification of Dutch Railway Disruption Data (2024)
 
-FAIR Data Engineering course project, University of Twente, 2026-1A – **Group 18** (Balachandar Gurumurthy)(Raghav Harish Ragunathan).
+FAIR Data Engineering course project, University of Twente, 2026-1A – **Group 18** (Balachandar Gurumurthy, Raghav Harish Ragunathan).
 
 This repository contains the 2024 train disruption data published by
 [Rijden de Treinen](https://www.rijdendetreinen.nl/en/open-data/disruptions), before and after FAIRification.
@@ -26,7 +26,8 @@ The redirect rules (a copy is in [`w3id/`](w3id/)) are published through the cou
 | `data/fairified/` | FAIRified data in RDF Turtle (81,756 triples) |
 | `ontology/` | Mini-ontology created in Protégé |
 | `metadata/` | Metadata exported from the FAIR Data Point (FDP v1.18): fdp, catalog, dataset and both distributions, plus `docker-compose.yml` to run the same FDP |
-| `metadata/schemas/` | SHACL metadata schemas of the FDP (Resource, FAIR Data Point, Catalog, Dataset, Distribution); the metadata conforms to them |
+| `metadata/schemas/` | SHACL metadata schemas of the FDP (Resource, FAIR Data Point, Catalog, Dataset, Distribution). Dataset is extended with `dct:temporal`, `dct:source` and `dct:creator`; Distribution is extended so `dcat:downloadURL` is required and `dcat:format` is an IRI. The metadata conforms to them |
+| `docs/` | Diagram of the semantic data model, with cardinalities |
 | `openrefine/` | OpenRefine operation history incl. the RDF skeleton (re-applicable with *Undo/Redo → Apply*) and `line-names.csv` |
 
 ## How the data was produced
@@ -43,12 +44,23 @@ To reproduce the RDF: open the original CSV in OpenRefine (with the RDF extensio
 
 ## Data model in short
 
+![Semantic data model](docs/semantic-model.png)
+
+
 - Each disruption is an `ont:TrainDisruption` (a `schema:Event`) with `schema:startDate`, `schema:endDate`
   (`xsd:dateTime` with time zone), `schema:duration` (ISO 8601, e.g. `PT181M`), its stations
   (`schema:location` → `schema:TrainStation`), its lines (`ont:affectsLine` → `ont:RailwayLine`) and its
   causes (`ont:hasCause`, `ont:hasStatisticalCause` → `ont:DisruptionCause`).
 - Causes are SKOS concepts with Dutch and English labels; each statistical cause points to its cause group
   with `skos:broader`.
+
+## Metadata (DCAT)
+
+| Record | Key values |
+|---|---|
+| Dataset | creator Rijden de Treinen, source page, licence CC BY 4.0, theme Transport, period 2024-01-01 to 2024-12-31 |
+| Distribution – RDF | accessURL `…/group18/data`, downloadURL the Turtle file in this repository, format `file-type/RDF_TURTLE` |
+| Distribution – original CSV | accessURL `…/group18/original`, downloadURL `https://opendata.rijdendetreinen.nl/public/disruptions/disruptions-2024.csv` (where the file was obtained), format `file-type/CSV` |
 
 ## Known limitations
 

@@ -30,6 +30,7 @@
   ], [
     sh:path dcat:downloadURL ;
     sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
     sh:maxCount 1 ;
     dash:editor dash:URIEditor ;
     sh:order 23 ;
@@ -43,10 +44,10 @@
     sh:order 24 ;
   ], [
     sh:path dcat:format ;
-    sh:nodeKind sh:Literal ;
+    sh:nodeKind sh:IRI ;
     sh:maxCount 1 ;
-    dash:editor dash:TextFieldEditor ;
-    dash:viewer dash:LiteralViewer ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:LabelViewer ;
     sh:order 25 ;
   ], [
     sh:path dcat:byteSize ;

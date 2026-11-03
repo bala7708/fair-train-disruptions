@@ -1,0 +1,53 @@
+digraph model {
+  rankdir=LR;
+  graph [fontname="DejaVu Sans", nodesep=0.35, ranksep=0.9, pad=0.3, bgcolor="white"];
+  node  [fontname="DejaVu Sans", fontsize=11, shape=box, style="rounded,filled", penwidth=1.2];
+  edge  [fontname="DejaVu Sans", fontsize=9.5, color="#555555", arrowsize=0.7];
+
+  // classes: blue = existing vocabulary, orange = own mini-ontology
+  D  [label="ont:TrainDisruption\n⊑ schema:Event", fillcolor="#FCE4CC", color="#C2671A"];
+  S  [label="schema:TrainStation", fillcolor="#D6E4F5", color="#2F5F98"];
+  L  [label="ont:RailwayLine", fillcolor="#FCE4CC", color="#C2671A"];
+  C  [label="ont:DisruptionCause\n⊑ skos:Concept", fillcolor="#FCE4CC", color="#C2671A"];
+  G  [label="ont:CauseGroup\n⊑ skos:Concept", fillcolor="#FCE4CC", color="#C2671A"];
+  WD [label="Wikidata entity\n(wd:Q…)", fillcolor="#E6E6E6", color="#777777", style="rounded,filled,dashed"];
+
+  // literals
+  node [shape=box, style="filled", fillcolor="#FFFFFF", color="#AAAAAA", fontsize=10];
+  d_id  [label="xsd:string\n\"51320\""];
+  d_st  [label="xsd:dateTime\n2024-01-01T07:03:51+01:00"];
+  d_en  [label="xsd:dateTime\n2024-01-01T10:05:12+01:00"];
+  d_du  [label="xsd:duration\n\"PT181M\""];
+  s_id  [label="xsd:string\n\"KPN\""];
+  s_nm  [label="xsd:string\n\"Kampen\""];
+  l_id  [label="xsd:string\n\"49\""];
+  l_nm  [label="xsd:string\n\"Kampen - Zwolle\""];
+  c_lb  [label="rdf:langString\n\"problemen met de personeelsinzet\"@nl\n\"staffing problems\"@en"];
+  g_lb  [label="rdf:langString\n\"staff\"@en"];
+
+  D -> d_id [label="schema:identifier  (1)"];
+  D -> d_st [label="schema:startDate  (1)"];
+  D -> d_en [label="schema:endDate  (0..1)"];
+  D -> d_du [label="schema:duration  (0..1)"];
+  D -> S    [label="schema:location  (1..n)"];
+  D -> L    [label="ont:affectsLine  (1..n)"];
+  D -> C    [label="ont:hasCause  (1)"];
+  D -> C    [label="ont:hasStatisticalCause  (1)"];
+
+  S -> s_id [label="schema:identifier  (1)"];
+  S -> s_nm [label="schema:name  (1)"];
+  S -> WD   [label="schema:sameAs  (0..1)", style=dashed];
+  L -> l_id [label="schema:identifier  (1)"];
+  L -> l_nm [label="schema:name  (0..1)"];
+  C -> c_lb [label="skos:prefLabel  (1 per lang.)"];
+  C -> G    [label="skos:broader  (0..1)"];
+  G -> g_lb [label="skos:prefLabel  (1 per lang.)"];
+
+  { rank=same; S; L; C; }
+  subgraph cluster_legend { label="Legend"; fontsize=10; color="#BBBBBB"; style=rounded;
+    node [shape=box, style="rounded,filled", fontsize=9.5];
+    k1 [label="existing vocabulary", fillcolor="#D6E4F5", color="#2F5F98"];
+    k2 [label="own mini-ontology (ont:)", fillcolor="#FCE4CC", color="#C2671A"];
+    k3 [label="literal value (example)", style="filled", fillcolor="#FFFFFF", color="#AAAAAA"];
+    k1 -> k2 -> k3 [style=invis]; }
+}

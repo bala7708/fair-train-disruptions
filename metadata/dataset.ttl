@@ -30,6 +30,7 @@
   dcat:theme <http://publications.europa.eu/resource/authority/data-theme/TRAN>;
   dcat:distribution <http://localhost/distribution/42e4fc2f-47f1-4c56-9ed8-8bdb61d9eac0>,
     <http://localhost/distribution/3ae1d369-a750-4dc1-a5b7-2d3e9217c6fc>;
+  dcterms:creator <https://www.rijdendetreinen.nl/>;
   dcterms:source <https://www.rijdendetreinen.nl/en/open-data/disruptions>;
   dcterms:temporal [ a dcterms:PeriodOfTime;
       dcat:endDate "2024-12-31";

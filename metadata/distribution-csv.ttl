@@ -23,8 +23,8 @@
     <http://localhost/distribution/3ae1d369-a750-4dc1-a5b7-2d3e9217c6fc/metrics/5d27e854a9e78eb3f663331cd47cdc13>;
   dcterms:isPartOf <http://localhost/dataset/5333c5cc-a7b4-4de4-b492-3b8de23fe64b>;
   dcat:accessURL <https://w3id.org/FAIR-course-UT/2026/group18/original>;
-  dcat:downloadURL <https://raw.githubusercontent.com/bala7708/fair-train-disruptions/main/data/original/disruptions-2024.csv>;
-  dcat:format "http://publications.europa.eu/resource/authority/file-type/CSV";
+  dcat:downloadURL <https://opendata.rijdendetreinen.nl/public/disruptions/disruptions-2024.csv>;
+  dcat:format <http://publications.europa.eu/resource/authority/file-type/CSV>;
   dcat:mediaType "text/csv";
   dcterms:conformsTo <http://localhost/profile/02c649de-c579-43bb-b470-306abdc808c7> .
 
